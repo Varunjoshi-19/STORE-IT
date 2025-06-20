@@ -1,13 +1,19 @@
 'use client';
 
-import { avatarPlaceholderUrl, navItems } from '@/constants'
+import { navItems } from '@/constants'
 import { cn } from '@/lib/utils';
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
-function Sidebar() {
+interface SidebarPayload  {
+  fullName : string,
+  email : string,
+  avatar : string
+}
+
+function Sidebar({fullName , email , avatar} : SidebarPayload) {
 
   const pathname = usePathname();
 
@@ -59,7 +65,7 @@ function Sidebar() {
 
         <div className='siderbar-user-info'>
           <Image
-            src={avatarPlaceholderUrl}
+            src={avatar}
             alt='Avatar'
             width={44}
             height={44}
@@ -67,10 +73,11 @@ function Sidebar() {
           />
           
           <div className='hidden lg:block'>
-            <p className='subtitle-2 capitalize'>varun</p>
-            <p className='caption'>varunjoshi@gmail.com</p>
+            <p className='subtitle-2 capitalize'>{fullName}</p>
+            <p className='caption'>{email}</p>
 
             {/* CODE FROM HERE  1:58:58 */}
+
 
           </div>
 

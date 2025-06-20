@@ -82,6 +82,6 @@ export const sortTypes = [
 ];
 
 export const avatarPlaceholderUrl =
-  "https://cdn-icons-png.flaticon.com/512/6596/6596121.png";
+  "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?uid=R204277241&ga=GA1.1.287263438.1749828001&semt=ais_hybrid&w=740";
 
 export const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
