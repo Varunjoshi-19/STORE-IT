@@ -1,12 +1,14 @@
-## npm install : 
-       To install all dependencies and libaries of next js 
+## To install all dependencies and libaries of next js: 
+                             npm install
 
-## npm run dev : 
-      allows you to run your application on default PORT:localhost:3000
+## allows you to run your application on default PORT:localhost:3000 :
+                              npm run dev : 
+      
 
 
-## Things used in this project : 
-          {Next js ( using Typescript and tailwindcss), Appwrite (database) , shadcn (UI) }
+##  {Next js ( using Typescript and tailwindcss), Appwrite (database) , shadcn (UI) }
+                                   Things used in this project : 
+         
 
 
 !! Project is currently under progress...............
