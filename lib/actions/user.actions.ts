@@ -4,6 +4,8 @@ import { ID, Query } from "node-appwrite";
 import { createAdminClient } from "../appwrite";
 import { appwriteConfig } from "../appwrite/config";
 import { parseStringify } from "../utils";
+import { cookies } from "next/headers";
+import { avatarPlaceholderUrl } from "@/constants";
 
 const getUserByEmail = async (email: string) => {
     const { databases } = await createAdminClient();
@@ -23,7 +25,7 @@ const handleError = (error: unknown, message: string) => {
 }
 
 
-const sendEmailOTP = async ({ email }: { email: string }) => {
+export const sendEmailOTP = async ({ email }: { email: string }) => {
     const { account } = await createAdminClient();
 
     try {
@@ -36,7 +38,7 @@ const sendEmailOTP = async ({ email }: { email: string }) => {
 }
 
 export const createAccount = async ({ fullName, email }: { fullName: string, email: string }) => {
- 
+
 
     const existingUser = await getUserByEmail(email);
 
@@ -46,7 +48,7 @@ export const createAccount = async ({ fullName, email }: { fullName: string, ema
 
     if (!existingUser) {
         const { databases } = await createAdminClient();
-        
+
         await databases.createDocument(
             appwriteConfig.databaseId,
             appwriteConfig.usersCollectionId,
@@ -54,12 +56,34 @@ export const createAccount = async ({ fullName, email }: { fullName: string, ema
             {
                 fullName,
                 email,
-                avatar: "https://cdn-icons-png.flaticon.com/512/6596/6596121.png",
+                avatar: avatarPlaceholderUrl,
                 accountId,
             }
         )
     }
 
     return parseStringify({ accountId });
+
+}
+
+export const verifySecret = async ({ accountId, password }: { accountId: string, password: string }) => {
+
+    try {
+
+        const { account } = await createAdminClient();
+        const session = await account.createSession(accountId, password);
+
+        (await cookies()).set("appwrite-session", session.secret, {
+            path: "/",
+            httpOnly: true,
+            sameSite: 'strict',
+            secure: true
+        });
+
+        return parseStringify({sessionId : session.$id})
+
+    } catch (error) {
+          handleError(error , "Failed to send OTP");
+    }
 
 }
