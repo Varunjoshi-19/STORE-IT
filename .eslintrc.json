@@ -1,4 +1,7 @@
 {
   "extends": ["next", "next/core-web-vitals", "eslint:recommended" , "standard" ,"plugin:tailwindcss/recommended" , "prettier"],
-
+  "rules" : { 
+    "no-undef" : "off"
+  } 
+   
 }

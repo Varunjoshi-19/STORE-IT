@@ -1,6 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+
+  experimental : {
+     serverActions : {
+       bodySizeLimit : "100MB",
+     }
+  },
+
   images: {
     domains: ['cdn-icons-png.flaticon.com'],
 
@@ -19,6 +26,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'cloud.appwrite.io'
       },
+
+      {
+         protocol :'https',
+         hostname : 'fra.cloud.appwrite.io'
+      }
     ]
   }
 };
